@@ -61,40 +61,33 @@ export default function NewNFT() {
     let transaction = await nftContract.createToken(tokenURI);
 
     const tx = await transaction.wait();
-    console.log(tx);
 
-    // console.log(tx);
+    const event = tx.events[0];
+    const value = event.args[2];
+    const tokenId = value.toNumber();
 
-    // const event = tx.events[0];
-    // const value = event.args[2];
-    // const tokenId = value.toNumber();
+    const price = ethers.utils.parseUnits(String(values.price), "ether");
 
-    // const price = ethers.utils.parseUnits(String(values.price), "ether");
+    const nftMarketContract = new ethers.Contract(
+      config.nftMarketAddress,
+      NFTMarket.abi,
+      signer
+    ) as nftMarketType;
 
-    // const nftMarketContract = new ethers.Contract(
-    //   config.nftMarketAddress,
-    //   NFTMarket.abi,
-    //   signer
-    // ) as nftMarketType;
+    const listingPrice = await nftMarketContract.getListingPrice();
 
-    // const items = await nftMarketContract.fetchMarketItems();
+    transaction = await nftMarketContract.createMarketItem(
+      config.nftAddress,
+      tokenId,
+      price,
+      {
+        value: listingPrice,
+      }
+    );
 
-    // console.log(items);
+    await transaction.wait();
 
-    // const listingPrice = await nftMarketContract.getListingPrice();
-
-    // transaction = await nftMarketContract.createMarketItem(
-    //   config.nftAddress,
-    //   tokenId,
-    //   price,
-    //   {
-    //     value: listingPrice,
-    //   }
-    // );
-
-    // await transaction.wait();
-
-    // router.push("/");
+    router.push("/");
   }
 
   const InnerForm = (props: FormikProps<FormValues>) => {
