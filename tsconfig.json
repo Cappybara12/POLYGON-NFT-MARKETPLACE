@@ -6,8 +6,31 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "declaration": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
   },
-  "include": ["./scripts", "./test", "./typechain"],
-  "files": ["./hardhat.config.ts"]
+  "include": [
+    "./scripts",
+    "./test",
+    "./typechain"
+  ],
+  "files": [
+    "./hardhat.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
