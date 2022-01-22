@@ -4,16 +4,22 @@ type NFTProps = {
   name: string;
   description: string;
   price: number;
+  imageSrc: string;
 };
 
-export default function NFTCard({ name, description, price }: NFTProps) {
+export default function ItemCard({
+  name,
+  description,
+  price,
+  imageSrc,
+}: NFTProps) {
   return (
     <div className="w-[17rem] h-[25rem] rounded-lg flex flex-col justify-between overflow-hidden">
-      <div className="">
+      <div className="h-[13rem]">
         <img
           className="w-full h-full object-cover"
-          src="/images/test.jpg"
-          alt=""
+          src={imageSrc}
+          alt={imageSrc}
         />
       </div>
 

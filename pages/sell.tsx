@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import NewNFT from "../components/new-nft";
+import NewItem from "../components/new-item";
 
 const Sell: NextPage = () => {
   return (
     <div className="flex flex-col justify-center items-center pt-4">
-      <NewNFT />
+      <NewItem />
     </div>
   );
 };
