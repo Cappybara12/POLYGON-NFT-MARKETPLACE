@@ -1,4 +1,4 @@
-import { Disclosure, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ const navigations: Navigation[] = [
   { name: "Home", href: "/" },
   { name: "Sell Digital Asset", href: "/sell" },
   { name: "My Digital Assets", href: "/assets" },
-  { name: "Creator Dashboard", href: "/dashboard" },
+  { name: "Creator Dashboard", href: "/creator-dashboard" },
 ];
 
 function classNames(...classes) {
@@ -29,9 +29,9 @@ export default function Navbar() {
           <div className="w-[90%] h-full flex items-center justify-between mx-auto">
             <h1 className="text-white text-lg font-bold">NFT MarketPlace</h1>
             <ul className="hidden md:flex items-center justify-around w-[70%]">
-              {navigations.map((n) => {
+              {navigations.map((n, index) => {
                 return (
-                  <Link href={n.href}>
+                  <Link key={index} href={n.href}>
                     <li
                       className={classNames(
                         router.pathname === n.href
@@ -56,9 +56,10 @@ export default function Navbar() {
             </Disclosure.Button>
 
             <Disclosure.Panel className="md:hidden absolute top-20 left-0 h-44 w-full bg-gray-600 flex flex-col justify-center">
-              {navigations.map((n) => {
+              {navigations.map((n, index) => {
                 return (
                   <Disclosure.Button
+                    key={index}
                     className={classNames(
                       router.pathname == n.href ? "bg-white" : "",
                       "p-2 text-pink-400 hover:bg-white hover:text-black"

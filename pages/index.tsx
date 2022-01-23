@@ -9,9 +9,11 @@ import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import { NFTMarket as nftMarketType } from "../typechain/NFTMarket";
 import { NFT as nftType } from "../typechain/NFT";
 import axios from "axios";
+import SyncLoader from "react-spinners/BeatLoader";
 
 const Home: NextPage = () => {
   const [items, setItems] = useState([]);
+  const [itemsLoaded, setItemsLoaded] = useState(false);
 
   async function getMarketItems() {
     const web3Model = new Web3Model();
@@ -48,9 +50,8 @@ const Home: NextPage = () => {
       })
     );
 
-    console.log(items);
-
     setItems(items);
+    setItemsLoaded(true);
   }
 
   useEffect(() => {
@@ -61,10 +62,11 @@ const Home: NextPage = () => {
     <div className="flex flex-col justify-center items-center pt-4">
       <h1 className="text-2xl">MarketPlace</h1>
       <hr className="w-[50%] p-2" />
-      {items.length ? (
+      {items.length && itemsLoaded ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <ItemCard
+              key={index}
               name={item.name}
               description={item.description}
               imageSrc={item.imageSrc}
@@ -74,7 +76,11 @@ const Home: NextPage = () => {
         </div>
       ) : (
         <p className="flex items-center justify-center h-40 text-3xl">
-          No Items in the MarketPlace
+          {itemsLoaded ? (
+            "No Items in the MarketPlace"
+          ) : (
+            <SyncLoader size={20} />
+          )}
         </p>
       )}
     </div>

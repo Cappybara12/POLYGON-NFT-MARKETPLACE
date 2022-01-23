@@ -185,7 +185,6 @@ export default function NewNFT() {
                         rows={3}
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
                         placeholder="Description about NFT"
-                        defaultValue={""}
                       />
                     </div>
                     <p className="mt-2 text-sm text-gray-500">
@@ -300,7 +299,7 @@ export default function NewNFT() {
     mapPropsToValues: (props) => {
       return {
         name: "",
-        price: null,
+        price: undefined,
         description: "",
         fileUrl: "",
       };
