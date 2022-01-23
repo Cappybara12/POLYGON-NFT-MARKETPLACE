@@ -3,7 +3,7 @@ import Image from "next/image";
 type NFTProps = {
   name: string;
   description: string;
-  price: number;
+  price: string;
   imageSrc: string;
 };
 
