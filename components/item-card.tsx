@@ -1,10 +1,12 @@
-import Image from "next/image";
+import { buyNFT } from "../utils/nft-market";
+import { useRouter } from "next/router";
 
 type NFTProps = {
   name: string;
   description: string;
   price: string;
   imageSrc: string;
+  itemId: number;
 };
 
 export default function ItemCard({
@@ -12,7 +14,20 @@ export default function ItemCard({
   description,
   price,
   imageSrc,
+  itemId,
 }: NFTProps) {
+  const router = useRouter();
+
+  async function handleBuy() {
+    const nft = {
+      price,
+      itemId,
+    };
+
+    await buyNFT(nft);
+    router.reload();
+  }
+
   return (
     <div className="w-[17rem] h-[25rem] rounded-lg flex flex-col justify-between overflow-hidden">
       <div className="h-[13rem]">
@@ -31,9 +46,15 @@ export default function ItemCard({
 
       <div className="bg-black text-white h-[40%] p-2">
         <p className="font-bold my-2">{price} ETH</p>
-        <button className="bg-pink-500 w-full rounded-sm font-bold py-1">
-          Buy
-        </button>
+
+        {router.pathname == "/" && (
+          <button
+            onClick={handleBuy}
+            className="bg-pink-500 w-full rounded-sm font-bold py-1"
+          >
+            Buy
+          </button>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,11 @@ import axios from "axios";
 
 type fetchType = "marketItems" | "myNFTs" | "itemsCreated";
 
+type NFT = {
+  price: string;
+  itemId: number;
+};
+
 export async function getItems(fetch: fetchType) {
   const fetchMethodConvert = {
     marketItems: "fetchMarketItems",
@@ -45,10 +50,30 @@ export async function getItems(fetch: fetchType) {
         name: metaData.name,
         description: metaData.description,
         imageSrc: metaData.imageUrl,
+        itemId: item.itemId.toNumber(),
         price: ethers.utils.formatUnits(item.price, "ether"),
       };
     })
   );
 
   return items;
+}
+
+export async function buyNFT(nft: NFT) {
+  const web3Modal = new Web3Model();
+  const instance = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(instance);
+  const signer = provider.getSigner();
+
+  const nftMarketContract = new ethers.Contract(
+    config.nftMarketAddress,
+    NFTMarket.abi,
+    signer
+  ) as nftMarketType;
+  const price = ethers.utils.parseUnits(nft.price, "ether");
+
+  const transaction = await nftMarketContract.createMarketSale(nft.itemId, {
+    value: price,
+  });
+  await transaction.wait();
 }
