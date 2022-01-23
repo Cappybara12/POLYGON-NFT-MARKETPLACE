@@ -133,7 +133,7 @@ export default function NewNFT() {
                 Make NFT item using following form.
                 <br />
                 <span className="font-bold">
-                  0.2 ETH will be charged from your account for the listing
+                  0.0002 ETH will be charged from your account for the listing
                   price.
                 </span>
               </p>

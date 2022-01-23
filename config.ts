@@ -1,4 +1,4 @@
 export default {
-  nftAddress: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-  nftMarketAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  nftAddress: "0xefF48d2792C5792118F69D447D8Ca076820EeFC1",
+  nftMarketAddress: "0x4947abEfBabCeA5dD1882D4173188Ba5Aa6fe7ee",
 };
