@@ -1,6 +1,5 @@
-import Web3Model from "web3modal";
 import { ethers } from "ethers";
-import config from "../config";
+import config from "../config/contract";
 import NFTMarket from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import { NFTMarket as nftMarketType } from "../typechain/NFTMarket";
@@ -14,18 +13,18 @@ type NFT = {
   itemId: number;
 };
 
-export async function getItems(fetch: fetchType) {
+export async function getItems(web3Provider: any, fetch: fetchType) {
+  if (!web3Provider) {
+    return false;
+  }
+
   const fetchMethodConvert = {
     marketItems: "fetchMarketItems",
     myNFTs: "fetchMyNFTs",
     itemsCreated: "fetchItemsCreated",
   };
 
-  const web3Model = new Web3Model();
-  const instance = await web3Model.connect();
-
-  const provider = new ethers.providers.Web3Provider(instance);
-  const signer = provider.getSigner();
+  const signer = web3Provider.getSigner();
 
   const nftMarketContract = new ethers.Contract(
     config.nftMarketAddress,
@@ -59,11 +58,8 @@ export async function getItems(fetch: fetchType) {
   return items;
 }
 
-export async function buyNFT(nft: NFT) {
-  const web3Modal = new Web3Model();
-  const instance = await web3Modal.connect();
-  const provider = new ethers.providers.Web3Provider(instance);
-  const signer = provider.getSigner();
+export async function buyNFT(web3Provider: any, nft: NFT) {
+  const signer = web3Provider.getSigner();
 
   const nftMarketContract = new ethers.Contract(
     config.nftMarketAddress,

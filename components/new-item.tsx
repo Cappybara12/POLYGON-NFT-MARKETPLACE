@@ -7,11 +7,14 @@ import { CheckIcon } from "@heroicons/react/outline";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import config from "../config";
+import config from "../config/contract";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import NFTMarket from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import { NFT as nftType } from "../typechain/NFT";
 import { NFTMarket as nftMarketType } from "../typechain/NFTMarket";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const ipfsClient = create({
   url: "https://ipfs.infura.io:5001/api/v0",
@@ -34,6 +37,7 @@ type FormValues = {
 };
 
 export default function NewNFT() {
+  const { web3Provider } = useSelector((state: RootState) => state.web3);
   const [fileUrl, setFileUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
@@ -46,11 +50,7 @@ export default function NewNFT() {
 
     const tokenURI = `https://ipfs.infura.io/ipfs/${added.path}`;
 
-    const web3Modal = new Web3Modal();
-
-    const instance = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(instance);
-    const signer = provider.getSigner();
+    const signer = web3Provider.getSigner();
 
     const nftContract = new ethers.Contract(
       config.nftAddress,

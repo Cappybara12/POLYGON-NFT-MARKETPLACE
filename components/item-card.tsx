@@ -1,6 +1,9 @@
 import { buyNFT } from "../utils/nft-market";
 import { useRouter } from "next/router";
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+
 type NFTProps = {
   name: string;
   description: string;
@@ -16,6 +19,8 @@ export default function ItemCard({
   imageSrc,
   itemId,
 }: NFTProps) {
+  const { web3Provider } = useSelector((state: RootState) => state.web3);
+
   const router = useRouter();
 
   async function handleBuy() {
@@ -24,7 +29,7 @@ export default function ItemCard({
       itemId,
     };
 
-    await buyNFT(nft);
+    await buyNFT(web3Provider, nft);
     router.reload();
   }
 

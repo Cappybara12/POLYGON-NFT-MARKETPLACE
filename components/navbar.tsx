@@ -2,6 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Web3Button from "../components/web3-button";
 
 type Navigation = {
   name: string;
@@ -27,7 +28,11 @@ export default function Navbar() {
       {({ open }) => (
         <>
           <div className="w-[90%] h-full flex items-center justify-between mx-auto">
-            <h1 className="text-white text-lg font-bold">NFT MarketPlace</h1>
+            <div className="flex items-center justify-center md:flex-col gap-2">
+              <h1 className="text-white text-lg font-bold">NFT MarketPlace</h1>
+              <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
+            </div>
+
             <ul className="hidden md:flex items-center justify-around w-[70%]">
               {navigations.map((n, index) => {
                 return (
