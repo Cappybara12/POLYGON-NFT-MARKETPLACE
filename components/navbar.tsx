@@ -2,7 +2,11 @@ import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Web3Button from "../components/web3-button";
+
+import dynamic from "next/dynamic";
+const Web3Button = dynamic(() => import("../components/web3-button"), {
+  ssr: false,
+});
 
 type Navigation = {
   name: string;

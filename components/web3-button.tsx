@@ -6,12 +6,16 @@ import { ethers } from "ethers";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 
+import * as UAuthWeb3Modal from "@uauth/web3modal";
+
 let web3Modal: Web3Modal;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
     cacheProvider: true,
     providerOptions,
   });
+
+  UAuthWeb3Modal.registerWeb3Modal(web3Modal);
 }
 
 export default function Web3Button({ className }: { className?: string }) {
