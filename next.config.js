@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ["ipfs.infura.io"],
   },
+  webpack5: false,
 };
 
 module.exports = nextConfig;

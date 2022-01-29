@@ -28,10 +28,10 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <Disclosure as="nav" className="h-20 bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="w-[90%] h-full flex items-center justify-between mx-auto">
+          <div className="w-[90%] h-[5rem] flex items-center justify-between mx-auto">
             <div className="flex items-center justify-center md:flex-col gap-2">
               <h1 className="text-white text-lg font-bold">NFT MarketPlace</h1>
               <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
@@ -63,23 +63,26 @@ export default function Navbar() {
                 <MenuIcon className="block text-white w-6 h-6" />
               )}
             </Disclosure.Button>
-
-            <Disclosure.Panel className="md:hidden absolute top-20 left-0 h-44 w-full bg-gray-600 flex flex-col justify-center">
-              {navigations.map((n, index) => {
-                return (
-                  <Disclosure.Button
-                    key={index}
-                    className={classNames(
-                      router.pathname == n.href ? "bg-white" : "",
-                      "p-2 text-pink-400 hover:bg-white hover:text-black"
-                    )}
-                  >
-                    <Link href={n.href}>{n.name}</Link>
-                  </Disclosure.Button>
-                );
-              })}
-            </Disclosure.Panel>
           </div>
+
+          <Disclosure.Panel
+            as="div"
+            className="md:hidden h-44 w-full bg-gray-600 flex flex-col justify-center"
+          >
+            {navigations.map((n, index) => {
+              return (
+                <Disclosure.Button
+                  key={index}
+                  className={classNames(
+                    router.pathname == n.href ? "bg-white" : "",
+                    "p-2 text-pink-400 hover:bg-white hover:text-black"
+                  )}
+                >
+                  <Link href={n.href}>{n.name}</Link>
+                </Disclosure.Button>
+              );
+            })}
+          </Disclosure.Panel>
         </>
       )}
     </Disclosure>

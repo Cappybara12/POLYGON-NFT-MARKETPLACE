@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "install": "npm install && npx hardhat compile"
+    "vercel-install": "npm install && npx hardhat compile"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
@@ -18,7 +18,7 @@
     "ethers": "^5.5.3",
     "formik": "^2.2.9",
     "ipfs-http-client": "^55.0.0",
-    "next": "12.0.8",
+    "next": "11.0.0",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",

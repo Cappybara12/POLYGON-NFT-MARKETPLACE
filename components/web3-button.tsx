@@ -11,7 +11,7 @@ import * as UAuthWeb3Modal from "@uauth/web3modal";
 let web3Modal: Web3Modal;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
-    cacheProvider: true,
+    cacheProvider: false,
     providerOptions,
   });
 
@@ -26,7 +26,13 @@ export default function Web3Button({ className }: { className?: string }) {
   const dispatch = useDispatch();
 
   const connect = useCallback(async function () {
-    const provider = await web3Modal.connect();
+    let provider;
+    try {
+      provider = await web3Modal.connect();
+    } catch (err) {
+      console.error("connection canceled");
+      return;
+    }
 
     const web3Provider = new ethers.providers.Web3Provider(provider);
 
