@@ -42,52 +42,57 @@ export default function NewNFT() {
   const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
 
-  async function createMarketItem(values: FormValues) {
-    const { name, description, fileUrl } = values;
-    const data = JSON.stringify({ name, description, imageUrl: fileUrl });
+  async function createMarketItem(values: FormValues, setSubmitting) {
+    try {
+      const { name, description, fileUrl } = values;
+      const data = JSON.stringify({ name, description, imageUrl: fileUrl });
 
-    const added = await ipfsClient.add(data);
+      const added = await ipfsClient.add(data);
 
-    const tokenURI = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const tokenURI = `https://ipfs.infura.io/ipfs/${added.path}`;
 
-    const signer = web3Provider.getSigner();
+      const signer = web3Provider.getSigner();
 
-    const nftContract = new ethers.Contract(
-      config.nftAddress,
-      NFT.abi,
-      signer
-    ) as nftType;
+      const nftContract = new ethers.Contract(
+        config.nftAddress,
+        NFT.abi,
+        signer
+      ) as nftType;
 
-    let transaction = await nftContract.createToken(tokenURI);
+      let transaction = await nftContract.createToken(tokenURI);
 
-    const tx = await transaction.wait();
+      const tx = await transaction.wait();
 
-    const event = tx.events[0];
-    const value = event.args[2];
-    const tokenId = value.toNumber();
+      const event = tx.events[0];
+      const value = event.args[2];
+      const tokenId = value.toNumber();
 
-    const price = ethers.utils.parseUnits(String(values.price), "ether");
+      const price = ethers.utils.parseUnits(String(values.price), "ether");
 
-    const nftMarketContract = new ethers.Contract(
-      config.nftMarketAddress,
-      NFTMarket.abi,
-      signer
-    ) as nftMarketType;
+      const nftMarketContract = new ethers.Contract(
+        config.nftMarketAddress,
+        NFTMarket.abi,
+        signer
+      ) as nftMarketType;
 
-    const listingPrice = await nftMarketContract.getListingPrice();
+      const listingPrice = await nftMarketContract.getListingPrice();
 
-    transaction = await nftMarketContract.createMarketItem(
-      config.nftAddress,
-      tokenId,
-      price,
-      {
-        value: listingPrice,
-      }
-    );
+      transaction = await nftMarketContract.createMarketItem(
+        config.nftAddress,
+        tokenId,
+        price,
+        {
+          value: listingPrice,
+        }
+      );
 
-    await transaction.wait();
+      await transaction.wait();
 
-    router.push("/");
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+      setSubmitting(false);
+    }
   }
 
   const InnerForm = (props: FormikProps<FormValues>) => {
@@ -307,8 +312,8 @@ export default function NewNFT() {
 
     validationSchema: FormSchema,
 
-    handleSubmit: (values) => {
-      createMarketItem(values);
+    handleSubmit: (values, { setSubmitting }) => {
+      createMarketItem(values, setSubmitting);
     },
   })(InnerForm);
 
