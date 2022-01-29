@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 
 import * as UAuthWeb3Modal from "@uauth/web3modal";
+import { useRouter } from "next/router";
 
 let web3Modal: Web3Modal;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
-    cacheProvider: false,
+    cacheProvider: true,
     providerOptions,
   });
 
@@ -22,6 +23,8 @@ export default function Web3Button({ className }: { className?: string }) {
   const { provider, web3Provider, address, chainId } = useSelector(
     (state: RootState) => state.web3
   );
+
+  const router = useRouter();
 
   const dispatch = useDispatch();
 

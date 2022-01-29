@@ -22,12 +22,7 @@ const Home: NextPage = () => {
     getMarketItems();
   }, []);
 
-  return (
-    <div>
-      <p>{address}</p>
-      <Items items={items} header="MarketPlace" itemsLoaded={itemsLoaded} />
-    </div>
-  );
+  return <Items items={items} header="MarketPlace" itemsLoaded={itemsLoaded} />;
 };
 
 export default Home;
