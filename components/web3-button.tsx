@@ -80,7 +80,9 @@ export default function Web3Button({ className }: { className?: string }) {
         console.log("accountsChanged", accounts);
         dispatch({
           type: "SET_ADDRESS",
-          address: accounts[0],
+          payload: {
+            address: accounts[0],
+          },
         });
       };
 
