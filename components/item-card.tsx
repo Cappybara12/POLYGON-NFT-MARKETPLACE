@@ -50,7 +50,7 @@ export default function ItemCard({
       </div>
 
       <div className="bg-black text-white h-[40%] p-2">
-        <p className="font-bold my-2">{price} ETH</p>
+        <p className="font-bold my-2">{price} MATIC</p>
 
         {router.pathname == "/" && (
           <button

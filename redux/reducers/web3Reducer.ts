@@ -5,6 +5,7 @@ type StateType = {
   web3Provider?: any;
   address?: string;
   chainId?: number;
+  user?: any;
 };
 
 type ActionType =
@@ -15,6 +16,7 @@ type ActionType =
         web3Provider?: StateType["web3Provider"];
         address?: StateType["address"];
         chainId?: StateType["chainId"];
+        user?: StateType["user"];
       };
     }
   | {
@@ -38,6 +40,7 @@ const initState: StateType = {
   web3Provider: null,
   address: null,
   chainId: null,
+  user: null,
 };
 
 const web3Reducer: (state: StateType, action: ActionType) => StateType = (
@@ -52,6 +55,7 @@ const web3Reducer: (state: StateType, action: ActionType) => StateType = (
         web3Provider: action.payload.web3Provider,
         address: action.payload.address,
         chainId: action.payload.chainId,
+        user: action.payload.user,
       };
 
     case "SET_ADDRESS":

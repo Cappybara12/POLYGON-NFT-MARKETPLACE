@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { create } from "ipfs-http-client";
 import SyncLoader from "react-spinners/SyncLoader";
 import { CheckIcon } from "@heroicons/react/outline";
-import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import config from "../config/contract";
@@ -138,7 +137,7 @@ export default function NewNFT() {
                 Make NFT item using following form.
                 <br />
                 <span className="font-bold">
-                  0.0002 ETH will be charged from your account for the listing
+                  0.0002 MATIC will be charged from your account for the listing
                   price.
                 </span>
               </p>
@@ -276,7 +275,7 @@ export default function NewNFT() {
                         name="price"
                         id="price"
                         className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 p-2"
-                        placeholder="NFT price in ETH"
+                        placeholder="NFT price in MATIC"
                       />
                     </div>
                   </div>

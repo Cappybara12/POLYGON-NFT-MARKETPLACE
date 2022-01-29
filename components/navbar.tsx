@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import dynamic from "next/dynamic";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 const Web3Button = dynamic(() => import("../components/web3-button"), {
   ssr: false,
 });
@@ -26,15 +28,25 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const router = useRouter();
+  const { user } = useSelector((state: RootState) => state.web3);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
           <div className="w-[90%] h-[5rem] flex items-center justify-between mx-auto">
-            <div className="flex items-center justify-center md:flex-col gap-2">
-              <h1 className="text-white text-lg font-bold">NFT MarketPlace</h1>
-              <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center md:flex-col gap-2 w-35">
+                <h1 className="text-white text-lg font-bold whitespace-nowrap">
+                  NFT MarketPlace
+                </h1>
+                <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
+              </div>
+              {user && (
+                <h2 className="text-white text-xl border-2 px-2 rounded-md">
+                  {user.address}
+                </h2>
+              )}
             </div>
 
             <ul className="hidden md:flex items-center justify-around w-[70%]">

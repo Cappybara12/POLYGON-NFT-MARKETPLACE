@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../config/providerOptions";
 import { ethers } from "ethers";
@@ -28,6 +28,14 @@ export default function Web3Button({ className }: { className?: string }) {
 
   const dispatch = useDispatch();
 
+  const uauth = useMemo(() => {
+    console.log("New UAuth instance");
+    const { package: uauthPackage, options: uauthOptions } =
+      providerOptions["custom-uauth"];
+
+    return UAuthWeb3Modal.getUAuth(uauthPackage, uauthOptions);
+  }, []);
+
   const connect = useCallback(async function () {
     let provider;
     try {
@@ -35,6 +43,11 @@ export default function Web3Button({ className }: { className?: string }) {
     } catch (err) {
       console.error("connection canceled");
       return;
+    }
+
+    let user: any;
+    if (web3Modal.cachedProvider === "custom-uauth") {
+      user = await uauth.user();
     }
 
     const web3Provider = new ethers.providers.Web3Provider(provider);
@@ -51,6 +64,7 @@ export default function Web3Button({ className }: { className?: string }) {
         web3Provider,
         address,
         chainId: network.chainId,
+        user,
       },
     });
   }, []);
@@ -116,7 +130,7 @@ export default function Web3Button({ className }: { className?: string }) {
     </button>
   ) : (
     <button className={className} onClick={connect}>
-      Connect
+      Connect Wallet
     </button>
   );
 }
