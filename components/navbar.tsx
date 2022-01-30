@@ -37,22 +37,22 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="w-[90%] h-[5rem] flex items-center justify-between mx-auto">
+          <div className="w-[95%] h-[5rem] flex items-center justify-between mx-auto">
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center md:flex-col gap-2 w-35">
+              <div className="flex items-center justify-center flex-col gap-2 w-35">
                 <h1 className="text-white text-lg font-bold whitespace-nowrap">
                   NFT MarketPlace
                 </h1>
                 <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
               </div>
               {(user || address) && (
-                <h2 className="text-white text-xl border-2 px-2 rounded-md">
-                  {user ? user.sub : address.substring(0, 10) + "..."}
+                <h2 className="text-white text-xl border-2 px-2 rounded-md max-w-[10rem] lg:max-w-[30rem] truncate">
+                  {user ? user.sub : address}
                 </h2>
               )}
             </div>
 
-            <ul className="hidden md:flex items-center justify-around w-[70%]">
+            <ul className="hidden md:flex gap-2 items-center justify-around w-[70%] lg:w-[50%]">
               {navigations.map((n, index) => {
                 return (
                   <Link key={index} href={n.href}>
