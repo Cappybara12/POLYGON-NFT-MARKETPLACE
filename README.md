@@ -33,6 +33,7 @@ NFT MarketPlace runs on **Polygon Mumbai network** with "Login With Unstoppable"
 - Typescript
 - Nextjs
 - Reactjs
+- Redux
 - Tailwindcss
 - solidity
 - Hardhat
