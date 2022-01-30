@@ -22,7 +22,9 @@ const Home: NextPage = () => {
     getMarketItems();
   }, []);
 
-  return <Items items={items} header="MarketPlace" itemsLoaded={itemsLoaded} />;
+  return (
+    <Items items={items} header="Creator Dashboard" itemsLoaded={itemsLoaded} />
+  );
 };
 
 export default Home;
