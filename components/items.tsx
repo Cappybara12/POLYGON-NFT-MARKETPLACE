@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import SyncLoader from "react-spinners/BeatLoader";
 import ItemCard from "../components/item-card";
+import { RootState } from "../redux/store";
 
 type Item = {
   name: string;
@@ -16,6 +18,8 @@ type ItemsProps = {
 };
 
 export default function Items({ items, itemsLoaded, header }: ItemsProps) {
+  const { address } = useSelector((state: RootState) => state.web3);
+
   return (
     <div className="flex flex-col justify-center items-center pt-4 mb-4">
       <h1 className="text-2xl">{header}</h1>
@@ -35,7 +39,15 @@ export default function Items({ items, itemsLoaded, header }: ItemsProps) {
         </div>
       ) : (
         <p className="flex items-center justify-center h-40 text-3xl">
-          {itemsLoaded ? "No Items available" : <SyncLoader size={20} />}
+          {itemsLoaded ? (
+            address ? (
+              "No Items available"
+            ) : (
+              "Connect wallet to see items"
+            )
+          ) : (
+            <SyncLoader size={20} />
+          )}
         </p>
       )}
     </div>

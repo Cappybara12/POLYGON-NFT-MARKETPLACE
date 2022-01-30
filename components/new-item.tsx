@@ -36,7 +36,9 @@ type FormValues = {
 };
 
 export default function NewNFT() {
-  const { web3Provider } = useSelector((state: RootState) => state.web3);
+  const { web3Provider, address } = useSelector(
+    (state: RootState) => state.web3
+  );
   const [fileUrl, setFileUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
@@ -283,10 +285,10 @@ export default function NewNFT() {
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     type="submit"
-                    disabled={isSubmitting || isUploading}
+                    disabled={isSubmitting || isUploading || !address}
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-pink-600 disabled:cursor-not-allowed disabled:bg-pink-400"
                   >
-                    Create Asset
+                    {address ? "Create Asset" : "Connect Wallet to Continue"}
                   </button>
                 </div>
               </div>
