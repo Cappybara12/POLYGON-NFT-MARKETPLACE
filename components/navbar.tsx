@@ -6,8 +6,11 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import Loading from "./loading";
+
 const Web3Button = dynamic(() => import("../components/web3-button"), {
   ssr: false,
+  loading: () => <Loading />,
 });
 
 type Navigation = {
