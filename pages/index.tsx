@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getMarketItems();
-  }, []);
+  }, [address]);
 
   return <Items items={items} header="MarketPlace" itemsLoaded={itemsLoaded} />;
 };
