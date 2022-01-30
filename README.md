@@ -1,4 +1,4 @@
-# Polygon NFT MarketPlace
+# PNM( Polygon NFT MarketPlace )
 
 NFT MarketPlace runs on **Polygon Mumbai network** with "Login With Unstoppable" as a login option.
 
