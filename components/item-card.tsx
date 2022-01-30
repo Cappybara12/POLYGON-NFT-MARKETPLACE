@@ -35,9 +35,9 @@ export default function ItemCard({
 
   return (
     <div className="w-[17rem] h-[25rem] rounded-lg flex flex-col justify-between overflow-hidden">
-      <div className="h-[13rem]">
+      <div>
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-[13rem] object-cover"
           src={imageSrc}
           alt={imageSrc}
         />
