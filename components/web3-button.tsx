@@ -48,7 +48,6 @@ export default function Web3Button({ className }: { className?: string }) {
     let user: any;
     if (web3Modal.cachedProvider === "custom-uauth") {
       user = await uauth.user();
-      console.log(user);
     }
 
     const web3Provider = new ethers.providers.Web3Provider(provider);

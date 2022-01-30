@@ -28,7 +28,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const router = useRouter();
-  const { user } = useSelector((state: RootState) => state.web3);
+  const { user, address } = useSelector((state: RootState) => state.web3);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -42,9 +42,9 @@ export default function Navbar() {
                 </h1>
                 <Web3Button className="text-white border-2 px-2 hover:bg-white hover:text-black transition-all duration-300" />
               </div>
-              {user && (
+              {(user || address) && (
                 <h2 className="text-white text-xl border-2 px-2 rounded-md">
-                  {user.address}
+                  {user ? user.sub : address.substring(0, 10) + "..."}
                 </h2>
               )}
             </div>
