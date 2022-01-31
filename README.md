@@ -8,7 +8,7 @@ NFT MarketPlace runs on **Polygon Mumbai network** with "Login With Unstoppable"
 
 
 
-### Login with Unstoppable Demo Video
+### Login with Unstoppable Domain Demo Video
 
 - https://youtu.be/Z8wmz7UQt3o
 
