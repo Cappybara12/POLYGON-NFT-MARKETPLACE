@@ -20,13 +20,6 @@ NFT MarketPlace runs on **Polygon Mumbai network** with "Login With Unstoppable"
 
 
 
-### Person of Contact
-
-- Discord ID: soheil#1703
-
-- UnstoppableDomain registered account email address: soheilrasekh555@gmail.com
-
-
 
 ### Tech Stack
 
